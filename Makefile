@@ -21,3 +21,10 @@ composer:
 
 cache:
 	docker-compose exec -u www-data front php bin/console cache:clear
+
+clearNetworks:
+	docker network prune
+
+show:
+	docker-compose ps
+

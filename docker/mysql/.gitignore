@@ -1,0 +1,7 @@
+*
+!.gitignore
+!dumps
+!mysql-data
+!mysql-files
+!config
+!config/*

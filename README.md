@@ -2,6 +2,7 @@
 
 ## Branches:
 1. nginx+php7+worker+mysql
+2. nginx+php8+worker+mysql
 
 
 ## Make:
@@ -11,6 +12,7 @@
 4. watch
 5. composer
 6. cache
+7. clearNetworks - Очистка созданных сетей.
 
 ## Commands:
 1. 
