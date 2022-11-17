@@ -21,3 +21,11 @@
 
 docker-compose up -d --no-deps --build nginx
 docker-compose build nginx
+docker-compose exec php8 bash
+
+
+
+
+composer create-project symfony/skeleton:"6.1.*" app
+composer require webapp
+cp -rp app/* ./../app

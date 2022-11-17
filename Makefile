@@ -2,9 +2,10 @@ default: init
 
 init:
 	docker-compose up -d
-	# docker-compose exec -u www-data nginx composer install
-	# docker-compose exec -u www-data php8 composer install
-	# 
+	sudo chown -R www-data:www-data app/
+	docker-compose exec php8 composer install
+	docker-compose exec php8 composer require webapp
+	docker-compose exec php8 cp -rp app/* ./../app
 	docker-compose ps
 
 run:
