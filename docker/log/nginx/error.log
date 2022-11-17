@@ -1,0 +1,8 @@
+2022/11/17 14:44:37 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 14:45:23 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 14:59:24 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 15:03:03 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 15:03:57 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 15:05:16 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 15:06:47 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19
+2022/11/17 15:07:28 [emerg] 1#1: host not found in upstream "php8" in /etc/nginx/conf.d/default.conf:19

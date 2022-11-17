@@ -1,7 +1,7 @@
 # myDockerAll
 
 ## Branches:
-1. nginx+php7+worker+mysql
+1. nginx+php8+worker+mysql
 2. nginx+php8+worker+mysql
 
 
@@ -16,3 +16,8 @@
 
 ## Commands:
 1. 
+
+
+
+docker-compose up -d --no-deps --build nginx
+docker-compose build nginx
