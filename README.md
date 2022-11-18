@@ -23,7 +23,7 @@ docker-compose up -d --no-deps --build nginx
 docker-compose build nginx
 docker-compose exec php8 bash
 
-
+netstat -tulpn | grep :3306 - узнать свободен ли порт
 
 
 composer create-project symfony/skeleton:"6.1.*" app

@@ -1,8 +1,13 @@
 default: init
 
+db:
+	docker-compose up -d db
+	docker-compose ps
+
 init:
 	docker-compose up -d
 	sudo chown -R www-data:www-data app/
+	sudo chmod -R 777 app/
 	docker-compose exec php8 composer install
 	docker-compose exec php8 composer require webapp
 	docker-compose exec php8 cp -rp app/* ./../app
@@ -10,6 +15,7 @@ init:
 
 run:
 	docker-compose up -d
+	docker-compose ps
 
 stop:
 	docker-compose down
