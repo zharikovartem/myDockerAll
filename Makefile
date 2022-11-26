@@ -35,3 +35,6 @@ clearNetworks:
 show:
 	docker-compose ps
 
+cillAll:
+	docker rm -f $(docker ps -aq)
+
