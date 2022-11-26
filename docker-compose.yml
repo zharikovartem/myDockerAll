@@ -10,6 +10,20 @@ networks:
                 -   subnet: 10.103.0.17/16
 
 services:
+    nodejs:
+        build:
+            context: ./
+            dockerfile: ./docker/node/Dockerfile
+        volumes:
+            - ./frontend:/var/www/node
+            - ./frontend/node_modules:/var/www/node/node_modules
+        ports:
+            - "3001:3000"
+        # depends_on:
+        #     - php8
+        networks:
+            - internal
+
     db:
         networks:
             - internal
