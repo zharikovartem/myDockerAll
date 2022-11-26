@@ -1,18 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
 import './App.css';
+import store from './Redux/store';
+import RouterComponent from './Router/RouterComponent';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <h2>Что то  поменяем</h2>
-      </header>
-    </div>
+    return (
+      <Provider store={store}>
+          <RouterComponent/>
+      </Provider>
   );
 }
 
