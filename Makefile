@@ -38,5 +38,16 @@ show:
 cillAll:
 	docker rm -f $(docker ps -aq)
 
+clearDB:
+	sudo rm -rf docker/mysql/mysql-data
+
 # docker-compose logs db
 # docker-compose logs nodejs
+
+# sevirce docker restart
+
+# СПИСОК СЕТЕЙ
+# docker network ls
+
+# УДАЛИТЬ НУЖНУЮ СЕТЬ
+# docker network rm pool_network
