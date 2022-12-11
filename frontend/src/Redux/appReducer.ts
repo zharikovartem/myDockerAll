@@ -1,28 +1,31 @@
 import { AnyAction, Dispatch } from 'redux'
 import { authAPI } from '../Api/authApi'
-import { BaseThunkType, InferActionsTypes } from './store'
 import { setAuth, setUserData } from "./authReducer"
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { BaseThunkType } from './store'
+
+const APP_SET_STATUS_INITIALIZED = 'APP/SET_STATUS'
 
 type StatusType = 'failed' | 'success' | 'loading' | 'idle'
 
-export type AppInitialStateType ={
+export type AppInitialStateType = {
     isInitialized: boolean;
     status: StatusType;
 }
 
-let initialState:AppInitialStateType = {
+let initialState: AppInitialStateType = {
     isInitialized: false,
     status: 'idle',
 }
 
-type ActionsType = InferActionsTypes<typeof actions>
+// type ActionsType = InferActionsTypes<typeof actions>
 
 const appReducer = (state = initialState, action: AnyAction): AppInitialStateType => {
     switch (action.type) {
         case 'APP/SET_STATUS':
             return {
-                ...state, 
-                isInitialized: true, 
+                ...state,
+                isInitialized: true,
                 status: action.status
             }
         default:
@@ -30,27 +33,29 @@ const appReducer = (state = initialState, action: AnyAction): AppInitialStateTyp
     }
 }
 
-export const actions = {
-    setStatusApp: (status: StatusType) => ({type: 'APP/SET_STATUS', status} as const),
-}
+// export const actions = {
+//     setStatusApp: (status: StatusType) => ({ type: 'APP/SET_STATUS', status } as const),
+// }
 
-export const getStatusApp = ():ThunkType => {
+const setStatusApp = (status: StatusType) => ({type: APP_SET_STATUS_INITIALIZED, status } as const)
+
+
+export const getStatusApp = (): ThunkType => {
     return async (dispatch) => {
         const response = await authAPI.checkAuth()
         if (response?.status === 200) {
-            dispatch( setUserData(response.data.userData) )
-            dispatch( setAuth(true))
+            dispatch(setUserData(response.data.userData))
+            dispatch(setAuth(true))
 
         } else {
-            dispatch( setAuth(false) )
+            dispatch(setAuth(false))
             localStorage.removeItem('apiKey')
         }
-        dispatch(actions.setStatusApp('success'))
+        dispatch(setStatusApp('success'))
     }
 }
 
 export default appReducer
 
-type ActionsTypes = InferActionsTypes<typeof actions>
-type ThunkType = BaseThunkType<AnyAction>
-export type DispatchType = Dispatch<ActionsTypes>
+type ActionType = ReturnType<typeof setStatusApp>
+type ThunkType = BaseThunkType<ActionType>

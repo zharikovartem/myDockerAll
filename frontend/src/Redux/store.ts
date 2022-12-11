@@ -10,26 +10,25 @@ let rootReducer = combineReducers({
     appReducer: appReducer,
     authReducer: authReducer
 })
-type rootReducerType = typeof rootReducer
-export type AppStateType = ReturnType<rootReducerType>
-export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
-export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+// type rootReducerType = typeof rootReducer
+// export type AppStateType = ReturnType<rootReducerType>
+// export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+// export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
+// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// export const store = configureStore({
-//     reducer: {
-//       app: appReducer
-//     }
-// })
+export const store = configureStore({
+    reducer: rootReducer
+})
 
-export type RootState = ReturnType<typeof store.getState>
+export type AppStateType = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
-// // type ActionsTypes = InferActionsTypes<AnyAction>
-// export type ThunkType = BaseThunkType<AnyAction>
-// export type DispatchType = Dispatch<AnyAction>
+export const useAppDispatch: () => AppDispatch = useDispatch
+
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
+export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
 export default store
