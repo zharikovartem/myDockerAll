@@ -1,12 +1,13 @@
 import { Dispatch } from 'redux'
-import { authAPI } from '../Api/authApi'
+import { authAPI, LoginDataType } from '../Api/authApi'
 import { BaseThunkType, InferActionsTypes } from './store'
 
 export type UserType = {
     id?: number
     fullName: string
     phone?: any
-    email?: string
+    email: string
+    password?: string
 }
 
 export type InitialStateType ={
@@ -53,6 +54,20 @@ export const setAuth = (status: boolean): ThunkType => {
 export const setUserData = (userData: UserType): ThunkType => {
     return async (dispatch, getState) => {
         dispatch( actions.setUserData(userData) )
+    }
+}
+
+export const login = (userData: LoginDataType): ThunkType => {
+    return async (dispatch, getState) => {
+        const response = await authAPI.loginCheck({
+            ...userData,
+            email: userData.username
+        })
+        console.log(response)
+        if (response.status === 200) {
+
+        }
+        // dispatch( actions.setUserData(userData) )
     }
 }
 
