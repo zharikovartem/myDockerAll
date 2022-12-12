@@ -10,6 +10,8 @@ init:
 	sudo chmod -R 777 app/
 	docker-compose exec php8 composer install
 	docker-compose exec php8 composer require webapp
+	docker-compose exec php8 composer require --dev doctrine/doctrine-fixtures-bundle
+
 	docker-compose exec php8 cp -rp app/* ./../app
 	docker-compose ps
 

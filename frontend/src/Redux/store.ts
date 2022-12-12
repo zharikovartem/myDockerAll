@@ -1,5 +1,5 @@
-import { Action, combineReducers, createStore, applyMiddleware, AnyAction, Dispatch } from "redux"
-import thunkMiddleware, { ThunkAction } from "redux-thunk"
+import { Action, combineReducers } from "redux"
+import { ThunkAction } from "redux-thunk"
 import { configureStore } from '@reduxjs/toolkit'
 import appReducer from "./appReducer"
 import authReducer from "./authReducer"

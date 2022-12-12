@@ -10,6 +10,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_SALLER = 'ROLE_SALLER';
+    const ROLE_CLIENT = 'ROLE_CLIENT';
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_DEFAULT = 'ROLE_DEFAULT';
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
