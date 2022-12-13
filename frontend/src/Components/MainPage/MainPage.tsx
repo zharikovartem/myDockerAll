@@ -17,13 +17,25 @@ const MainPage:React.FC<MainPagePropsType> = (props) => {
 
             <ul>
                 <li>(done)Создать дэфолтного юзера</li>
-                <li>Реализовать логин и регистрацию</li>
+                <li>(done)Реализовать логин</li>
+                <li>Реализовать регистрацию</li>
                 <li>Сделать базовое меню</li>
                 <li>Вывести базовый функционал</li>
             </ul>
 
             <ul>
                 <li>Api-platform</li>
+            </ul>
+
+            <ul>
+                <li>Web-sockets</li>
+            </ul>
+
+            <ul>
+                <li>Clean php</li>
+                <li>Clean js</li>
+                <li>Clean yaml</li>
+                <li>Clean packages</li>
             </ul>
         </>
     )
