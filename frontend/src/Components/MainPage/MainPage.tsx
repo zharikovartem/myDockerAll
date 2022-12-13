@@ -24,7 +24,7 @@ const MainPage:React.FC<MainPagePropsType> = (props) => {
             </ul>
 
             <ul>
-                <li>Api-platform</li>
+                <li>(done)Api-platform</li>
             </ul>
 
             <ul>
