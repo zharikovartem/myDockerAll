@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { routers } from './Routers';
-import { Spinner } from '../Elements/Spinner/Spinner';
-import { AppInitialStateType, getStatusApp } from '../Redux/appReducer';
-import { AppStateType } from '../Redux/store';
-// import { useAppDispatch, useAppSelector } from '../Hooks/hooks';
+import { useAppDispatch } from '../Redux/store';
+import { selectIsAuth } from '../Redux/Selectors/authSelector';
+import { checkAuth } from '../Redux/authReducer';
 
 // const useAppDispatch: () => AppDispatch = useDispatch
 
 const RouterComponent: React.FC = () => {
-    // const dispatch = useAppDispatch()
 
-    // const { isInitialized } = useAppSelector(state => state.appReducer)
-    // const [isInitialized, setIsInitialized] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
 
-    // useEffect(() => {
-    //     // @ts-ignore
-    //     dispatch(getStatusApp())
-    // }, [])
+    // const isAuth = useSelector(selectIsAuth)
 
-    // if ( !isInitialized ) {
-    //     return (
-    //         <Spinner/>
-    //     )
-    // }
+    useEffect(() => {
+        dispatch(checkAuth())
+    }, [])
 
     return (
         <RouterProvider router={routers} />
