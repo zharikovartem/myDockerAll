@@ -1,3 +1,4 @@
+import { prepearFilterParams } from '../Universal/Helpers/prepearFilterParams'
 import { instance, url } from './Api'
 
 export const universalAPI = {
@@ -17,7 +18,8 @@ export const universalAPI = {
     },
 
     getItems(name: string, query: any) {
-        return instance.get(`/api/${name}_get_all`,)
+        let stringified: string = prepearFilterParams(query, 'api');
+        return instance.get(`/api/${name}${stringified}`,)
         .then(response => {
             return response
         })

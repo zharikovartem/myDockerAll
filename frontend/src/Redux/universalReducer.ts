@@ -1,5 +1,7 @@
 import { Dispatch } from 'redux'
 import { universalAPI } from '../Api/universalAPI'
+import { FormDataType, FormUploadDataType } from '../Universal/UniversalForm/UniversalForm'
+import { QueryParamsType } from '../Universal/UniversalTableView/UniversalTableView'
 import { BaseThunkType, InferActionsTypes } from './store'
 
 export type ItemsListsType = {
@@ -60,12 +62,28 @@ export const actions = {
     setItemsLists: (itemsListsdata: itemsListsdata, name: string) => ({type: 'UNIVERSAL/SET_ITENS_LIST', itemsListsdata, name} as const),
 }
 
-export const getItems = (name: string, query: any): ThunkType => {
+export const updateItem = (
+    field: string, 
+    item: any, 
+    queryParams?: any, 
+    uploadData?: FormUploadDataType, 
+    dependedObjects?: FormDataType
+): ThunkType => {
+    return async (dispatch, getState) => {
+        // const response = await universalAPI.getItems(name, query)
+        // console.log(response)
+        // if (response.status === 200) {
+        //     dispatch(actions.setAllItemsLists(response.data, name))
+        // }
+    }
+}
+
+export const getItems = (name: string, query?: QueryParamsType): ThunkType => {
     return async (dispatch, getState) => {
         const response = await universalAPI.getItems(name, query)
         console.log(response)
         if (response.status === 200) {
-            dispatch(actions.setAllItemsLists(response.data, name))
+            dispatch(actions.setItemsLists(response.data, name))
         }
     }
 }
