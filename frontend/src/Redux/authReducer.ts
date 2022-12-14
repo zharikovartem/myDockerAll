@@ -61,7 +61,6 @@ export const checkAuth = (): ThunkType => {
     return async (dispatch, getState) => {
         const response = await authAPI.checkAuth()
         if (response?.status === 200) {
-            console.log(response)
             dispatch( actions.setUserData(response.data.userData) )
             dispatch( actions.setAuth(true))
 
