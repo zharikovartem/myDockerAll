@@ -21,12 +21,12 @@ class Catalog
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?bool $isActive = null;
+    private ?bool $isActive = true;
 
     #[ORM\Column(nullable: true)]
     private ?int $totalCount = null;
 
-    #[ORM\OneToOne(inversedBy: 'parent', targetEntity: self::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'parent', targetEntity: self::class, cascade: ['persist', 'remove'])]
     private ?self $parent = null;
 
     #[ORM\Column(nullable: true)]
