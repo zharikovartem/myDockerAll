@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { TablePagination } from '@mui/material'
-import { AppStateType } from '../../Redux/store'
 import { QueryParamsType } from './UniversalTableView'
 import styled from "styled-components";
-import { selectCurrentListCount } from '../../Redux/Selectors/universalSelector'
+import { selectCurrentListCount } from '../Redux/universalSelector'
 
 type TablePaginationPropsType = {
     params: QueryParamsType

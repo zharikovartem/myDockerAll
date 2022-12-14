@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux'
-import { universalAPI } from '../Api/universalAPI'
-import { FormDataType, FormUploadDataType } from '../Universal/UniversalForm/UniversalForm'
-import { QueryParamsType } from '../Universal/UniversalTableView/UniversalTableView'
-import { BaseThunkType, InferActionsTypes } from './store'
+import { BaseThunkType, InferActionsTypes } from '../../Redux/store'
+import { FormDataType, FormUploadDataType } from '../UniversalForm/UniversalForm'
+import { QueryParamsType } from '../UniversalTableView/UniversalTableView'
+import { universalAPI } from './universalAPI'
 
 export type ItemsListsType = {
     [key: string] : any[]

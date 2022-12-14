@@ -12,8 +12,8 @@ import { TableItemRow } from './TableItemRow'
 import TablePaginationComponent from './TablePaginationComponent'
 import styled from 'styled-components'
 import { prepearFilterParams } from '../Helpers/prepearFilterParams'
-import { selectCurrentList } from '../../Redux/Selectors/universalSelector'
-import { getItems } from '../../Redux/universalReducer'
+import { selectCurrentList } from '../Redux/universalSelector'
+import { getItems } from '../Redux/universalReducer'
 
 const defaultParams: QueryParamsType = {
     page: 1,

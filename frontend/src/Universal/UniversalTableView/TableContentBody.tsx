@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { Fade, TableCell, TableRow } from '@mui/material';
 import { FieldsType, ObjectDataType, QueryParamsType } from './UniversalTableView';
-import { updateItem } from '../../Redux/universalReducer'
 import { useAppDispatch } from "../../Redux/store";
+import { updateItem } from '../Redux/universalReducer';
 
 type TableBodyPropsType = {
   items: Array<any>
@@ -15,7 +15,7 @@ type TableBodyPropsType = {
   objectData?: ObjectDataType
 };
 
-export const TableContentBody: FC<TableBodyPropsType> = (props) => {
+export const TableContentBody: React.FC<TableBodyPropsType> = (props) => {
 
   const dispatch = useAppDispatch()
 

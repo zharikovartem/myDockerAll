@@ -1,13 +1,9 @@
-import { Spin } from 'antd'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { selectIsAuth } from '../../Redux/Selectors/authSelector'
-import { selectCurrentAllList, selectCurrentAllListCount } from '../../Redux/Selectors/universalSelector'
 import { useAppDispatch } from '../../Redux/store'
-import { getAllItems } from '../../Redux/universalReducer'
+import { getAllItems } from '../../Universal/Redux/universalReducer'
+import { selectCurrentAllListCount, selectCurrentAllList } from '../../Universal/Redux/universalSelector'
 import UniversalTableView from '../../Universal/UniversalTableView/UniversalTableView'
-import LoginForm from '../Login/LoginForm'
 
 type MainPagePropsType = {
 
@@ -41,7 +37,6 @@ const MainPage: React.FC<MainPagePropsType> = (props) => {
                 fields={[
                     { label: 'Id', name: 'id' },
                     { label: 'Name', name: 'name' },
-                    { label: 'Url', name: 'url' },
                     { label: 'Url', name: 'url' },
                     { label: 'parent', name: 'parent' },
                 ]}

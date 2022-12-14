@@ -1,5 +1,5 @@
-import { prepearFilterParams } from '../Universal/Helpers/prepearFilterParams'
-import { instance, url } from './Api'
+import { instance } from "../../Api/Api"
+import { prepearFilterParams } from "../Helpers/prepearFilterParams"
 
 export const universalAPI = {
     getAllItems(name: string) {
