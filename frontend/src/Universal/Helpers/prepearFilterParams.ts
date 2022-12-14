@@ -1,4 +1,4 @@
-import { PaginationParamsType } from "../UniversalTableView/UniversalTableView";
+import { PaginationParamsType } from "../UniversalTableView/UniversalTableView"
 
 export const prepearFilterParams = (params: any, from?: any): string => {
     console.log('1) prepearFilterParams(', from,')', {...params})

@@ -47,7 +47,7 @@ export const refreshToken = () => {
 }
 
 export const prepearFilterParams = (params: any, from?: any): string => {
-    let filterParam = '';
+    let filterParam = ''
 
     if (params.allActive) {
         delete (params.isActive)
@@ -58,8 +58,7 @@ export const prepearFilterParams = (params: any, from?: any): string => {
 
     for (const key in params) {
         if (Object.prototype.hasOwnProperty.call(params, key)) {
-            // const param = params[key as keyof PaginationParamsType];
-            const param = params[key];
+            const param = params[key]
             if (!Array.isArray(param) && typeof param === 'object') {
                 for (const paramKey in param) {
                     if (Object.prototype.hasOwnProperty.call(param, paramKey)) {

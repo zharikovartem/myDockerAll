@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { ScaleLoader } from "react-spinners";
-import styled from "styled-components";
+import React, { FC } from "react"
+import { ScaleLoader } from "react-spinners"
+import styled from "styled-components"
 
 
 export const Spinner: FC = () => {

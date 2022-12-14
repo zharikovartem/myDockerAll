@@ -1,5 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
-import MainPage from "../Components/MainPage/MainPage";
+import { createBrowserRouter } from "react-router-dom"
+import MainPage from "../Components/MainPage/MainPage"
 
 export const routers = createBrowserRouter([
     {

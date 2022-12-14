@@ -7,32 +7,31 @@ type HeaderPropsType = {
 }
 
 const Header:React.FC<HeaderPropsType> = (props) => {
-    const [current, setCurrent] = useState('mail');
+    const [current, setCurrent] = useState('mail')
 
     const onClick: MenuProps['onClick'] = (e) => {
-      console.log('click ', e);
-      setCurrent(e.key);
-    };
+      console.log('click ', e)
+      setCurrent(e.key)
+    }
   
-    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+    return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
 }
 
 export default  Header
 
 const items: MenuProps['items'] = [
     {
-      label: 'Navigation One',
+      label: 'Onliner',
       key: 'mail',
       icon: <MailOutlined />,
     },
     {
-      label: 'Navigation Two',
+      label: 'Parsers',
       key: 'app',
-      icon: <AppstoreOutlined />,
-      disabled: true,
+      icon: <AppstoreOutlined />
     },
     {
-      label: 'Navigation Three - Submenu',
+      label: 'Parsers',
       key: 'SubMenu',
       icon: <SettingOutlined />,
       children: [
@@ -74,4 +73,4 @@ const items: MenuProps['items'] = [
       ),
       key: 'alipay',
     },
-  ];
+  ]
