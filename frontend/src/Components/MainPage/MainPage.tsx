@@ -16,6 +16,10 @@ const MainPage:React.FC<MainPagePropsType> = (props) => {
             <br/>
 
             <ul>
+                <li>Перейти в новый репозиторий</li>
+            </ul>
+
+            <ul>
                 <li>(done)Создать дэфолтного юзера</li>
                 <li>(done)Реализовать логин</li>
                 <li>Реализовать регистрацию</li>

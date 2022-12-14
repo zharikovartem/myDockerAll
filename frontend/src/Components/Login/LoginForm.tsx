@@ -1,5 +1,6 @@
 import { Button, Checkbox, Form, Input } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
+import { LoginDataType } from '../../Api/authApi'
 import { login } from '../../Redux/authReducer'
 import { useAppDispatch } from '../../Redux/store'
 
@@ -10,6 +11,12 @@ type LoginFormPropsType = {
 const LoginForm: React.FC<LoginFormPropsType> = (props) => {
 
     const dispatch = useAppDispatch()
+
+    const [loginData, setLoginData] = useState<LoginDataType>({
+        email: 'admin@admin.com',
+        username: 'admin@admin.com',
+        password: '12345678'
+    })
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
@@ -28,7 +35,11 @@ const LoginForm: React.FC<LoginFormPropsType> = (props) => {
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
-            initialValues={{ remember: true }}
+            initialValues={{ 
+                remember: true,
+                username: 'admin@admin.com',
+                password: '12345678'
+            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -38,7 +49,7 @@ const LoginForm: React.FC<LoginFormPropsType> = (props) => {
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' }]}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
             <Form.Item
@@ -46,7 +57,7 @@ const LoginForm: React.FC<LoginFormPropsType> = (props) => {
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
-                <Input.Password />
+                <Input.Password/>
             </Form.Item>
 
             <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>

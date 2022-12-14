@@ -42,7 +42,13 @@ export const authAPI = {
     },
 
     checkAuth() {
-        return instance.get('/api/checkauth')
+        return instance.get('/api/checkauth',{
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('apikey'),
+                'Content-Type': 'application/json',
+                'Accept': "application/json"
+            }
+        })
         .then(response => {
             // console.log('checkAuth', response)
             return response
