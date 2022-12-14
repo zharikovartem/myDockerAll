@@ -19,7 +19,7 @@ const LoginForm: React.FC<LoginFormPropsType> = (props) => {
     })
 
     const onFinish = (values: any) => {
-        console.log('Success:', values);
+        console.log('Success:', values)
         dispatch(login({
             username: values.username,
             password: values.password
@@ -27,7 +27,7 @@ const LoginForm: React.FC<LoginFormPropsType> = (props) => {
     }
 
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
+        console.log('Failed:', errorInfo)
     }
 
     return (
