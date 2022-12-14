@@ -1,4 +1,4 @@
-default: init
+default: run
 
 db:
 	docker-compose up -d db
@@ -45,6 +45,8 @@ clearDB:
 
 # docker-compose logs db
 # docker-compose logs nodejs
+# docker-compose logs send_no_reply_worker
+# docker-compose logs rabbitmq
 
 # sevirce docker restart
 

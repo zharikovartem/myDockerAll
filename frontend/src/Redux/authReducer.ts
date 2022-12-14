@@ -11,12 +11,12 @@ export type UserType = {
 }
 
 export type InitialStateType ={
-    isAuth: boolean
+    isAuth?: boolean
     userData?: UserType
 }
 
 let initialState:InitialStateType = {
-    isAuth: false
+
 }
 
 type ActionsType = InferActionsTypes<typeof actions>
@@ -57,6 +57,21 @@ export const setUserData = (userData: UserType): ThunkType => {
     }
 }
 
+export const checkAuth = (): ThunkType => {
+    return async (dispatch, getState) => {
+        const response = await authAPI.checkAuth()
+        if (response?.status === 200) {
+            console.log(response)
+            dispatch( actions.setUserData(response.data.userData) )
+            dispatch( actions.setAuth(true))
+
+        } else {
+            dispatch( actions.setAuth(false) )
+            localStorage.removeItem('apiKey')
+        }
+    }
+}
+
 export const login = (userData: LoginDataType): ThunkType => {
     return async (dispatch, getState) => {
         const response = await authAPI.loginCheck({
@@ -65,7 +80,11 @@ export const login = (userData: LoginDataType): ThunkType => {
         })
         console.log(response)
         if (response.status === 200) {
-
+            localStorage.setItem('apikey', response.data.token)
+            // dispatch( actions.setAuth(true) )
+            dispatch(checkAuth())
+        } else {
+            dispatch( actions.setAuth(false) )
         }
         // dispatch( actions.setUserData(userData) )
     }
