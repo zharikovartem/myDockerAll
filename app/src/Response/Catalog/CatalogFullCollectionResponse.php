@@ -32,7 +32,8 @@ class CatalogFullCollectionResponse implements \JsonSerializable
                     $catalogs[] = [
                         'id' => $catalog->getId(),
                         'name' => $catalog->getName(),
-                        'parent'=> $catalog->getParent() ? $catalog->getParent()->getId() : null,
+                        'parent' => $catalog->getParent() ? $catalog->getParent()->getId() : null,
+                        'url' => $catalog->getUrl()
                     ];
                 }
                 

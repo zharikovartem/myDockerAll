@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api', name: 'api')]
 class CatalogController extends AbstractController
 {
-    #[Route('/catalog/get')]
+    #[Route('/catalogs_get')]
     public function new(CatalogService $messageGenerator): Response
     {
         $message = $messageGenerator->getHappyMessage();
@@ -25,7 +25,7 @@ class CatalogController extends AbstractController
         ]);
     }
 
-    #[Route('/catalog/get_all')]
+    #[Route('/catalogs_get_all')]
     public function list(CatalogRepository $catalogRepository): Response
     {
         $catalog = $catalogRepository->findAll();

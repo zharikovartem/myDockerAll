@@ -4,20 +4,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import appReducer from "./appReducer"
 import authReducer from "./authReducer"
 import { useDispatch } from "react-redux"
+import universalReducer from "./universalReducer"
 
 
 let rootReducer = combineReducers({
     appReducer: appReducer,
-    authReducer: authReducer
+    authReducer: authReducer,
+    universalReducer: universalReducer
 })
-// type rootReducerType = typeof rootReducer
-// export type AppStateType = ReturnType<rootReducerType>
-// export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
-// export type BaseThunkType<A extends Action = Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
-// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
-
-
-// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const store = configureStore({
     reducer: rootReducer
