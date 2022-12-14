@@ -16,6 +16,10 @@ const MainPage: React.FC<MainPagePropsType> = (props) => {
             <h1>Main Page</h1>
             <h3>Parsers list:</h3>
             <li>Onliner</li>
+
+
+            <h3>To Do</h3>
+            <li>base entity</li>
         </>
     )
 }
