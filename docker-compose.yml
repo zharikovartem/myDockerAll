@@ -7,7 +7,7 @@ networks:
             driver: default
             config:
                 # -   subnet: ${NETWORK_SUBNET}
-                -   subnet: 10.103.0.17/16
+                -   subnet: 10.104.0.17/16
 
 services:
     nodejs:
