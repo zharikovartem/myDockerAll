@@ -37,7 +37,7 @@ clearNetworks:
 show:
 	docker-compose ps
 
-cillAll:
+killAll:
 	docker rm -f $(docker ps -aq)
 
 clearDB:

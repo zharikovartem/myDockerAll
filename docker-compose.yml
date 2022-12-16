@@ -64,7 +64,7 @@ services:
         build:
             context: ./docker/php8
             args:
-                image: ${PHP8_IMAGE}
+                image: ${PHP_IMAGE}
                 tz: ${TZ}
         depends_on:
             - db
@@ -100,7 +100,7 @@ services:
         build:
             context: ./docker/php8
             args:
-                image: ${PHP8_IMAGE}
+                image: ${PHP_IMAGE}
                 tz: ${TZ}
         command: php /var/www/bin/console rabbitmq:consumer -m 100 send_no_reply_consumer
         depends_on:

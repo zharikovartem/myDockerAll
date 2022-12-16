@@ -41,7 +41,8 @@ class CatalogRepository extends ServiceEntityRepository
 
     public function checkTable(string $table)
     {
-        $schemaManager = $this->getDoctrine()->getConnection()->getSchemaManager();
+        // dd($this->getEntityManager());
+        $schemaManager = $this->getEntityManager()->getConnection()->createSchemaManager();
         return $schemaManager->tablesExist(array($table));
     }
 
