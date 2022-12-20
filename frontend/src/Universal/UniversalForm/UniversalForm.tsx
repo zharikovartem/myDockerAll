@@ -19,6 +19,7 @@ import 'dayjs/locale/es-us';
 import locale from 'antd/locale/en_US';
 import SunEditorField from './Fields/SunEditorField'
 import UploadSingleField, { SingleValueType } from './Fields/UploadSingleField'
+import { updateItem, createItem } from '../Redux/universalReducer'
 
 dayjs.extend(customParseFormat)
 
@@ -410,26 +411,26 @@ const UniversalForm: React.FC<UniversalFormPropsType> = (props) => {
 
         if (props.item) {
             console.log('UPDATE')
-            // dispatch(updateCurrentItem(
-            //     props.fieldName,
-            //     {
-            //         ...valuesToInsert,
-            //         id: props.item.id
-            //     },
-            //     {},
-            //     uploadData,
-            //     dependsFormData
-            // ))
+            dispatch(updateItem(
+                props.fieldName,
+                {
+                    ...valuesToInsert,
+                    id: props.item.id
+                },
+                {},
+                uploadData,
+                dependsFormData
+            ))
 
         } else {
             console.log('CREATE')
-            // dispatch(createCurrentItem(
-            //     props.fieldName,
-            //     valuesToInsert,
-            //     {},
-            //     uploadData,
-            //     dependsFormData
-            // ))
+            dispatch(createItem(
+                props.fieldName,
+                valuesToInsert,
+                {},
+                uploadData,
+                dependsFormData
+            ))
 
         }
     }

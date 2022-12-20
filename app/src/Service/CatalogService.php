@@ -25,6 +25,7 @@ class CatalogService
         // $base = 'https://catalog.onliner.by/';
         // $base = 'https://market.yandex.by/catalog--roboty-pylesosy/22493230/list?rs=eJwzEvDiEeIyNDc2szQ2MzQ3T2AEAButAyg%2C&hid=16302536&allowCollapsing=1&local-offers-first=0';
         // $base = 'https://suchen.mobile.de/fahrzeuge/svc/similar/?c=OffRoad&ms=9000%3B33&id%21=340937802&vc=Car&sid=463011&p=20990';
+        // $base = 'https://cars.av.by/filter?page=1';
         $base = 'https://cars.av.by/renault/megane/103233784';
 
         $document = new Document($base, false);

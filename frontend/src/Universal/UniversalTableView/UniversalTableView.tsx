@@ -241,11 +241,16 @@ type UniversalTableViewPropsType = {
     isQuery?: boolean
 }
 
+export type FieldComponentType = any
+
 export type FieldsType = {
     sortName?: string
     label: string
     name?: string
-    component?: any //React.FC<UniversalActionsPropsType> | ReactNode
+    /**
+     * Компонент выполняющий определенный функционал
+     */
+    component?: FieldComponentType //React.FC<UniversalActionsPropsType> | ReactNode
     target?: 'template' | 'fragment' | 'chain' | null
     action?: (targetId: number, fieldName?: string, value?: any) => void
     isPublic?: boolean

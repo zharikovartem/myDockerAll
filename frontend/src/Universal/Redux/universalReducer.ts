@@ -112,7 +112,7 @@ export const updateItem = (
     }
 }
 
-const createItem = (
+export const createItem = (
     field: string, 
     item: any, 
     queryParams?: any, 

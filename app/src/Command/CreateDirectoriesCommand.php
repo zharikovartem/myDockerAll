@@ -23,13 +23,15 @@ class CreateDirectoriesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->process('hoods');
+        $this->process('hoods', $output);
         return Command::SUCCESS;
     }
 
-    public function process(string $slug)
+    public function process(string $slug, OutputInterface $output)
     {
-        dump($slug);
-        dd($this->catalogRepository->checkTable($slug));
+        $output->write('123456');
+        // sleep(10);
+        // dump($slug);
+        // return ($this->catalogRepository->checkTable($slug));
     }
 }
