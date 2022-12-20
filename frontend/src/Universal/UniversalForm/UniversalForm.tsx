@@ -12,12 +12,13 @@ import DependedSelectField from './Fields/DependedSelectField'
 import DependedSelectWithAdd from './Fields/DependedSelectWithAdd'
 import InputField from './Fields/InputField'
 import SelectField from './Fields/SelectField'
-import UploadField from './Fields/UploadField'
+import UploadField, { ValueType } from './Fields/UploadField'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import 'dayjs/locale/es-us';
 import locale from 'antd/locale/en_US';
 import SunEditorField from './Fields/SunEditorField'
+import UploadSingleField, { SingleValueType } from './Fields/UploadSingleField'
 
 dayjs.extend(customParseFormat)
 
@@ -32,8 +33,7 @@ export type FormDataType = {
     [key: string]: any
 }
 export type FormUploadDataType = {
-    // [key: string]: UploadDataType
-    [key: string]: any
+    [key: string]: ValueType | SingleValueType
 }
 
 export type UniversalFirmFieldType = 'input' | 'inputNumber' | 'checkbox' | 'select' | 'dependedSelect' | 'innerForm' 
@@ -60,33 +60,30 @@ const UniversalForm: React.FC<UniversalFormPropsType> = (props) => {
 
     const generateFormData = () => {
         const newFormData: FormDataType = {}
-        console.log('generateFormData', props.item)
         props.item && props.fields.forEach(field => {
             if (typeof props.item[field.name] === 'object') {
-                field.name === 'imageFiles' && console.log('generateFormData upload', field.name, props.item[field.name])
                 if (field.type !== 'upload') {
-                    field.name === 'imageFiles' && console.log('generateFormData upload 1')
-                    newFormData[field.name] = props.item[field.name] && props.item[field.name].id ? props.item[field.name].id : props.item[field.name]
-                } else {
-                    field.name === 'imageFiles' && console.log('generateFormData upload 2')
                     if (Array.isArray(props.item[field.name])) {
-                        newFormData[field.name] = props.item[field.name].map( (i: any) => i.filename)
+                        newFormData[field.name] = props.item[field.name] && props.item[field.name].id ? props.item[field.name].id : props.item[field.name]
                     } else {
-                        console.log(props.item[field.name])
+                        newFormData[field.name] = props.item[field.name]
+                    }
+                } else {
+                    if (Array.isArray(props.item[field.name])) {
+                        newFormData[field.name] = props.item[field.name].map((i: any) => i.filename)
+                    } else {
                         if (props.item[field.name]) {
                             newFormData[field.name] = props.item[field.name].filename
                         } else {
                             newFormData[field.name] = []
                         }
-                        
+
                     }
                 }
-                
             } else {
                 newFormData[field.name] = props.item ? props.item[field.name] : ''
             }
         })
-        console.log('generateFormData', newFormData)
         return newFormData
     }
 
@@ -263,38 +260,34 @@ const UniversalForm: React.FC<UniversalFormPropsType> = (props) => {
                     <>No optionsSelector or optionsGetter</>
 
             case 'upload':
-                if (field.name === 'imageFiles') {
-                    console.log('upload imageFiles formData', formData)
-                    console.log('upload imageFiles props', props)
+                if (Array.isArray(formData[field.name])) {
+                    return <UploadField
+                        value={formData[field.name]}
+                        maxImageCount={field.maxImageCount ? field.maxImageCount : 1}
+                        onChange={(value: ValueType) => {
+                            const newUploadData = {...uploadData}
+                            newUploadData[field.name] = value
+                            setUploadData(newUploadData)
+                            const newFormData: FormDataType = { ...formData }
+                            newFormData[field.name] = value
+                            setFormData(newFormData)
+                        }}
+                    />
+                } else {
+                    console.log('UploadSingleField!!!', formData)
+                    return  <UploadSingleField
+                                value={formData[field.name]}
+                                maxImageCount={1}
+                                onChange={(value: SingleValueType) => {
+                                    const newUploadData = {...uploadData}
+                                    newUploadData[field.name] = value
+                                    setUploadData(newUploadData)
+                                    const newFormData: FormDataType = { ...formData }
+                                    newFormData[field.name] = value
+                                    setFormData(newFormData)
+                                }}
+                            />
                 }
-                return <UploadField
-                    value={formData[field.name]}
-                    maxImageCount={field.maxImageCount ? field.maxImageCount : 1}
-                    onChange={(value: UploadFile[]) => {
-                        console.log('UploadField value', value)
-                        const newUploadData: FormDataType = { ...uploadData }
-                        field.maxImageCount > 1 ?
-                            newUploadData[field.name] = value.length > 0 ? {
-                                file: value,
-                                type: 'array'
-                            } : {}
-                        :
-                            newUploadData[field.name] = value.length > 0 ? {
-                                file: value[0],
-                                type: 'string'
-                            } : {}
-
-
-
-                        setUploadData(newUploadData)
-
-                        const newFormData: FormDataType = { ...formData }
-                        newFormData[field.name] = value
-                        console.log('UploadField value newFormData', newFormData)
-                        console.log('setFormData: 8', newFormData)
-                        setFormData(newFormData)
-                    }}
-                />
 
             case 'textArea':
                 return <Input.TextArea />

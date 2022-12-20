@@ -7,7 +7,7 @@ import { selectIsAuth } from '../Redux/Selectors/authSelector'
 import { checkAuth } from '../Redux/authReducer'
 import LoginForm from '../Components/Login/LoginForm'
 import { Spin } from 'antd'
-import Header from '../Components/Header/Header'
+import Header from '../Layout/Header/Header'
 import styled from 'styled-components'
 
 const RouterComponent: React.FC = () => {
@@ -71,9 +71,11 @@ const RouterComponent: React.FC = () => {
     } else {
         return (
             <>
-                <Header />
                 <Container className='container'>
-                    <RouterProvider router={routers} />
+                    {/* <Header /> */}
+                    <RouterProvider 
+                        router={routers}
+                    />
                 </Container>
             </>
         )

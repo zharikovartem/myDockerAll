@@ -22,9 +22,15 @@ class CatalogService
             $catalogByName[$value->getName()] = $value;
         }
 
-        $base = 'https://catalog.onliner.by/';
+        // $base = 'https://catalog.onliner.by/';
+        // $base = 'https://market.yandex.by/catalog--roboty-pylesosy/22493230/list?rs=eJwzEvDiEeIyNDc2szQ2MzQ3T2AEAButAyg%2C&hid=16302536&allowCollapsing=1&local-offers-first=0';
+        // $base = 'https://suchen.mobile.de/fahrzeuge/svc/similar/?c=OffRoad&ms=9000%3B33&id%21=340937802&vc=Car&sid=463011&p=20990';
+        $base = 'https://cars.av.by/renault/megane/103233784';
 
-        $document = new Document($base, true);
+        $document = new Document($base, false);
+        dd($document);
+        var_dump($document);
+        die();
         $NamesById = [];
 
         foreach ($document->find('.catalog-navigation-classifier__item') as $key => $name) {

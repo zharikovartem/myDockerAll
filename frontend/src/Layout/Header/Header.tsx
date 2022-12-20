@@ -1,6 +1,7 @@
 import { Menu, MenuProps } from 'antd'
 import React, { useState } from 'react'
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons'
+import { redirect, useNavigate } from 'react-router-dom'
 
 type HeaderPropsType = {
 
@@ -9,9 +10,12 @@ type HeaderPropsType = {
 const Header: React.FC<HeaderPropsType> = (props) => {
     const [current, setCurrent] = useState('mail')
 
+    const navigate = useNavigate();
+
     const onClick: MenuProps['onClick'] = (e) => {
         console.log('click ', e)
         setCurrent(e.key)
+        navigate(`/${e.key}`)
     }
 
     return <Menu    onClick={onClick} 
@@ -24,17 +28,22 @@ export default Header
 
 const items: MenuProps['items'] = [
     {
-        label: 'Onliner',
-        key: 'mail',
+        label: 'Main',
+        key: '',
         icon: <MailOutlined />,
     },
     {
         label: 'Parsers',
-        key: 'app',
+        key: 'parsers',
         icon: <AppstoreOutlined />
     },
     {
-        label: 'Parsers',
+        label: 'To Do',
+        key: 'to_do',
+        icon: <AppstoreOutlined />
+    },
+    {
+        label: 'Any',
         key: 'SubMenu',
         icon: <SettingOutlined />,
         children: [
