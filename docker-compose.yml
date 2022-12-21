@@ -102,7 +102,7 @@ services:
             args:
                 image: ${PHP_IMAGE}
                 tz: ${TZ}
-        command: php /var/www/bin/console rabbitmq:consumer -m 100 send_no_reply_consumer
+        command: php /var/www/bin/console rabbitmq:consumer -m 100 parse
         depends_on:
             - db
             - rabbitmq
