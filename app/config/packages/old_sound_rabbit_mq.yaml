@@ -2,20 +2,20 @@ old_sound_rabbit_mq:
     connections:
         default:
             # url: '%env(RABBITMQ_URL)%'
-            # host:        '%env(RABBITMQ_HOST)%'
-            # user:        '%env(RABBITMQ_USER)%'
-            # password:    '%env(RABBITMQ_PASS)%'
-            # vhost:       '%env(RABBITMQ_VHOST)%'
+            host:        '%env(RABBITMQ_HOST)%'
+            user:        '%env(RABBITMQ_USER)%'
+            password:    '%env(RABBITMQ_PASS)%'
+            vhost:       '%env(RABBITMQ_VHOST)%'
             # lazy:        true
             # connection_timeout: 60
             # read_write_timeout: 60
             # keepalive: false
             # heartbeat: 0
-            host:     'localhost'
-            port:     15103
-            user:     'rabbitmq'
-            password: 'pass'
-            vhost:    '/'
+            # host:     'localhost'
+            # port:     15103
+            # user:     'rabbitmq'
+            # password: 'pass'
+            # vhost:    '/'
             lazy:     false
             connection_timeout: 3
             read_write_timeout: 3

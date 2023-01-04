@@ -58,7 +58,7 @@ services:
         ports:
             - ${NGINX_PORT}:80
 
-    php8:
+    php8: &php8
         networks:
             - internal
         build:
@@ -94,26 +94,29 @@ services:
             RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
             RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
 
+    # send_no_reply_worker:
+    #     networks:
+    #         - internal
+    #     build:
+    #         context: ./docker/php8
+    #         args:
+    #             image: ${PHP_IMAGE}
+    #             tz: ${TZ}
+    #     command: php /var/www/bin/console rabbitmq:consumer parse
+    #     depends_on:
+    #         - db
+    #         - rabbitmq
+    #     volumes:
+    #         - ./app:/var/www
+    #         - ./docker/php8/config/php/php.ini:/usr/local/etc/php/php.ini
+    #     expose:
+    #         - 9000
+    #     working_dir: /var/www
+    #     user: www-data
+    #     env_file:
+    #         - .env
+
     send_no_reply_worker:
-        networks:
-            - internal
-        build:
-            context: ./docker/php8
-            args:
-                image: ${PHP_IMAGE}
-                tz: ${TZ}
-        command: php /var/www/bin/console rabbitmq:consumer -m 100 parse
-        depends_on:
-            - db
-            - rabbitmq
-        volumes:
-            - ./app:/var/www
-            - ./docker/php8/config/php/php.ini:/usr/local/etc/php/php.ini
-            - ./docker/php8/config/exim4/update-exim4.conf.conf:/etc/exim4/update-exim4.conf.conf
-            - ./docker/php8/config/mailname:/etc/mailname
-        expose:
-            - 9000
-        working_dir: /var/www
-        user: www-data
-        env_file:
-            - .env
+        <<: *php8
+        command: [ 'php','/var/www/bin/console', 'rabbitmq:consumer', 'parse', '--env=prod', '--no-debug',  '-vvvv' ]
+        restart: always
