@@ -26,3 +26,7 @@ services:
     app.consumer.parse:
         class: App\Consumer\ParseConsumer
         arguments: []
+
+    parse_consumer:
+        class:  App\Consumer\ParseConsumer
+        arguments: []

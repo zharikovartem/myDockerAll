@@ -1,12 +1,11 @@
 <?php
 
-namespace app\Consumer;
+namespace App\Consumer;
 
-use OldSound\RabbitMqBundle\RabbitMq\BaseConsumer;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class ParseConsumer extends BaseConsumer
+class ParseConsumer extends ConsumerInterface
 {
     public function execute(AMQPMessage $msg)
     {
