@@ -36,7 +36,7 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
                 userData: action.userData
             }
         default:
-            return state;
+            return state
     }
 }
 

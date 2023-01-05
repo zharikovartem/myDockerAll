@@ -1,4 +1,4 @@
-import { AppStateType } from "../store"
+import { AppStateType } from "../../Redux/store"
 
 export const selectCurrentAllList = (field: string) => (state: AppStateType) => {
     return state.universalReducer.allItemsLists[field]

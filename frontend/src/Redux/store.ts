@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import appReducer from "./appReducer"
 import authReducer from "./authReducer"
 import { useDispatch } from "react-redux"
-import universalReducer from "./universalReducer"
+import universalReducer from "../Universal/Redux/universalReducer"
 
 
 let rootReducer = combineReducers({

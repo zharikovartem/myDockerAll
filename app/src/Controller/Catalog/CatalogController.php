@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Catalog;
 
+use App\Command\CreateDirectoriesCommand;
 use App\Repository\CatalogRepository;
 use App\Response\Catalog\CatalogFullCollectionResponse;
 use App\Service\CatalogService;
@@ -33,6 +34,20 @@ class CatalogController extends AbstractController
         return new JsonResponse([
             'items' => new CatalogFullCollectionResponse($catalog),
             'totalCount' => count($catalog)
+        ]);
+    }
+
+    #[Route('/catalogs_get_directory_items')]
+    public function getDirectoryItems(
+        CreateDirectoriesCommand $command
+    ): Response
+    {
+        // $command = new CatalogDirectoriesGetCommand($catalogRepository);
+        // dd($command);
+        $command->process('hoods');
+
+        return new JsonResponse([
+            'method' => 'getDirectoryItems'
         ]);
     }
 }

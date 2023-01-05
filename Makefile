@@ -4,6 +4,9 @@ db:
 	docker-compose up -d db
 	docker-compose ps
 
+perm:
+	sudo chmod -R 777 app/
+
 init:
 	docker-compose up -d
 	sudo chown -R www-data:www-data app/
@@ -29,7 +32,7 @@ composer:
 	docker-compose exec -u www-data front composer install
 
 cache:
-	docker-compose exec -u www-data front php bin/console cache:clear
+	docker-compose exec -u www-data front php8 bin/console cache:clear
 
 clearNetworks:
 	docker network prune
@@ -37,7 +40,7 @@ clearNetworks:
 show:
 	docker-compose ps
 
-cillAll:
+killAll:
 	docker rm -f $(docker ps -aq)
 
 clearDB:
@@ -47,6 +50,7 @@ clearDB:
 # docker-compose logs nodejs
 # docker-compose logs send_no_reply_worker
 # docker-compose logs rabbitmq
+# docker-compose logs send_no_reply_worker
 
 # sevirce docker restart
 

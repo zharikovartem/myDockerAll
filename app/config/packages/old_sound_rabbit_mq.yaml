@@ -1,0 +1,43 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            # url: '%env(RABBITMQ_URL)%'
+            host:        '%env(RABBITMQ_HOST)%'
+            user:        '%env(RABBITMQ_USER)%'
+            password:    '%env(RABBITMQ_PASS)%'
+            vhost:       '%env(RABBITMQ_VHOST)%'
+            # lazy:        true
+            # connection_timeout: 60
+            # read_write_timeout: 60
+            # keepalive: false
+            # heartbeat: 0
+            # host:     'localhost'
+            # port:     15103
+            # user:     'rabbitmq'
+            # password: 'pass'
+            # vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+            keepalive: false
+            heartbeat: 0
+            use_socket: true
+    producers:
+        parse:
+            connection:       default
+            exchange_options: { name: 'parse', type: direct }
+        # send_email:
+        #         connection:       default
+        #         exchange_options: { name: 'notification.v1.send_email', type: direct }
+    consumers:
+        parse:
+            connection:       default
+            exchange_options: { name: 'parse', type: direct }
+            queue_options:    { name: 'parse'}
+            callback:         App\Consumer\ParseConsumer
+            qos_options:      {prefetch_size: 0, prefetch_count: 1, global: false}
+        # send_email:
+        #         connection:       default
+        #         exchange_options: { name: 'notification.v1.send_email', type: direct }
+        #         queue_options:    { name: 'notification.v1.send_email' }
+        #         callback:         app.consumer.mail_sender

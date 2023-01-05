@@ -9,8 +9,8 @@ const APP_SET_STATUS_INITIALIZED = 'APP/SET_STATUS'
 type StatusType = 'failed' | 'success' | 'loading' | 'idle'
 
 export type AppInitialStateType = {
-    isInitialized: boolean;
-    status: StatusType;
+    isInitialized: boolean
+    status: StatusType
 }
 
 let initialState: AppInitialStateType = {
@@ -29,7 +29,7 @@ const appReducer = (state = initialState, action: AnyAction): AppInitialStateTyp
                 status: action.status
             }
         default:
-            return state;
+            return state
     }
 }
 
