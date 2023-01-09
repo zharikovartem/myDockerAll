@@ -47,6 +47,10 @@ killAll:
 clearDB:
 	sudo rm -rf docker/mysql/mysql-data
 
+# prod:
+# ssh root@81.90.180.185
+# cd sms_service/
+
 # docker-compose logs db
 # docker-compose logs nodejs
 # docker-compose logs send_no_reply_worker
