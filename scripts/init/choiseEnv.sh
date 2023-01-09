@@ -5,7 +5,7 @@ read -p "куда деплоим,: dev/prod/local  > " envType
 
 if [[ ${envType} == "prod" ]]
 then
-    cp ./env.prod ./env
+    cp .env.prod .env
 
     read -p "Нужно ли обновить .env  y/n  > " envChange
     if [[ ${envChange} == "y" ]]
