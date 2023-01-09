@@ -6,6 +6,7 @@ COPY ./frontend/package.json .
 COPY ./frontend/package-lock.json .
 
 RUN ls -la
+RUN pwd
 RUN cd frontend/
 
 RUN npm install
