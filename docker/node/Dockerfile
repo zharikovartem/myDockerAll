@@ -11,7 +11,7 @@ RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
 
 COPY . .
 
-
+RUN chown -R node /app/node_modules
 
 USER node
 
