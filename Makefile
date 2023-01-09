@@ -8,6 +8,7 @@ perm:
 	sudo chmod -R 777 app/
 
 init:
+	bash ./scripts/init/choiseEnv.sh
 	docker-compose up -d
 	sudo chown -R www-data:www-data app/
 	sudo chmod -R 777 app/
