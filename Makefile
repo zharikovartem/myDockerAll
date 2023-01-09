@@ -10,8 +10,8 @@ perm:
 init:
 	bash ./scripts/init/choiseEnv.sh
 	docker-compose up -d
-	sudo chown -R www-data:www-data app/
 	sudo chmod -R 777 app/
+	sudo chown -R www-data:www-data app/
 	docker-compose exec php8 composer install
 	docker-compose exec php8 composer require webapp
 	docker-compose exec php8 composer require --dev doctrine/doctrine-fixtures-bundle
