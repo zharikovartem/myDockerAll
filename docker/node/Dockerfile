@@ -4,8 +4,8 @@ WORKDIR /var/www/node
 
 COPY ./frontend/package.json .
 COPY ./frontend/package-lock.json .
-COPY ./frontend/* .
 
+RUN cd frontend/
 RUN npm install
 
 RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
