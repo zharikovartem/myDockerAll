@@ -21,7 +21,7 @@ class MessageController extends AbstractController
     public function getAll(MessageRepository $messageRepository): JsonResponse
     {
         return new JsonResponse([
-            'func' => 'index',
+            'func' => 'getAll',
             'items' => new MessageFullCollectionResponse($messageRepository->findAll())
         ]);
     }
@@ -47,7 +47,7 @@ class MessageController extends AbstractController
         $em->persist($message);
         $em->flush();
 
-        $response = new Response('<Response><Message>Welcome to Twilio SMS!!!</Message></Response>');
+        $response = new Response('<Response><Message>'.$body.'</Message></Response>');
         $response->headers->set('content-type', 'text/xml');
 
         echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
