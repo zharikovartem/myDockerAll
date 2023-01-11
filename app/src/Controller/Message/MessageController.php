@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twilio\Rest\Client;
 
@@ -26,7 +27,7 @@ class MessageController extends AbstractController
     }
 
     #[Route('/incoming_sms')]
-    public function callback(Request $request, ManagerRegistry $doctrine): JsonResponse
+    public function callback(Request $request, ManagerRegistry $doctrine): Response
     {
         $body = json_encode($request->query->all());
         $message = new Message();
@@ -42,10 +43,16 @@ class MessageController extends AbstractController
         $em->persist($message);
         $em->flush();
 
-        return new JsonResponse([
-            'func' => 'callback success',
-            'request' => $request->query->all()
-        ]);
+        $response = new Response('<Response></Response>');
+        $response->headers->set('content-type', 'text/xml');
+
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        return $response;
+
+        // return new JsonResponse([
+        //     'func' => 'callback success',
+        //     'request' => $request->query->all()
+        // ]);
     }
 
     #[Route('/send')]
