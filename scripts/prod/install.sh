@@ -6,6 +6,9 @@
 # cd 
 # git checkout -q SmsService
 
+# nginx:
+# 
+
 # 1. Установить docker
 sudo apt update && sudo apt upgrade
 sudo apt install apt-transport-https ca-certificates curl software-properties-common -y

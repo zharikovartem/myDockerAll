@@ -1,0 +1,6 @@
+# app/config/parameters.yml
+parameters:
+   # ...
+   twilio_sid: AC4bd0a2a45b7dcf57d4a9a49ee2fbb9e0
+   twilio_token: 2b59902077cb667db977a3e5fc0503d2
+   twilio_number: '+18595497065'

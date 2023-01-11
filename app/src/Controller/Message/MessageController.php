@@ -4,12 +4,23 @@ namespace App\Controller\Message;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Twilio\Rest\Client;
 
 #[Route('/api', name: 'api')]
 class MessageController extends AbstractController
 {
+
+    #[Route('/incoming_sms')]
+    public function callback(Request $request): JsonResponse
+    {
+        dd($request);
+        return new JsonResponse([
+            'func' => 'callback',
+        ]);
+    }
+
     #[Route('/send')]
     public function send(): JsonResponse
     {
