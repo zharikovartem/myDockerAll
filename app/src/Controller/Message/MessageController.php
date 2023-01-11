@@ -3,6 +3,8 @@
 namespace App\Controller\Message;
 
 use App\Entity\Message;
+use App\Repository\MessageRepository;
+use App\Response\Message\MessageFullCollectionResponse;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,10 +16,18 @@ use Twilio\Rest\Client;
 class MessageController extends AbstractController
 {
 
+    #[Route('/get_all')]
+    public function getAll(MessageRepository $messageRepository): JsonResponse
+    {
+        return new JsonResponse([
+            'func' => 'index',
+            'items' => new MessageFullCollectionResponse($messageRepository->findAll())
+        ]);
+    }
+
     #[Route('/incoming_sms')]
     public function callback(Request $request, ManagerRegistry $doctrine): JsonResponse
     {
-        // dd(json_encode($request->query->all()));
         $body = json_encode($request->query->all());
         $message = new Message();
 
@@ -27,7 +37,7 @@ class MessageController extends AbstractController
         $message->setSendTo('test To');
         $message->setSendFrom('test From');
         $message->setStatus('test status');
-        
+
         $em = $doctrine->getManager();
         $em->persist($message);
         $em->flush();
