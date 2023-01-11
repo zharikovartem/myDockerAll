@@ -2,6 +2,8 @@
 
 namespace App\Controller\Message;
 
+use App\Entity\Message;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +15,25 @@ class MessageController extends AbstractController
 {
 
     #[Route('/incoming_sms')]
-    public function callback(Request $request): JsonResponse
+    public function callback(Request $request, ManagerRegistry $doctrine): JsonResponse
     {
-        dd($request);
+        // dd(json_encode($request->query->all()));
+        $body = json_encode($request->query->all());
+        $message = new Message();
+
+        $message->setMessage($body);
+        $message->setType('incoming_sms');
+        $message->setSenderId(1);
+        $message->setSendTo('test To');
+        $message->setSendFrom('test From');
+        $message->setStatus('test status');
+        
+        $em = $doctrine->getManager();
+        $em->persist($message);
+        $em->flush();
+
         return new JsonResponse([
-            'func' => 'callback',
+            'func' => 'callback success',
         ]);
     }
 

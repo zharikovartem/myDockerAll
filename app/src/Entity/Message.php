@@ -39,6 +39,10 @@ class Message
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    public function __construct() {
+        $this->createAt = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
