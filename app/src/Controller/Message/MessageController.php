@@ -29,11 +29,13 @@ class MessageController extends AbstractController
     #[Route('/incoming_sms')]
     public function callback(Request $request, ManagerRegistry $doctrine): Response
     {
-        $body = json_encode($request->query->all());
-        if ($body !== '[]') {
-            // $body = json_encode($request->request->all());
-            $body = json_encode($request->getContent());
-        }
+        // $body = json_encode($request->query->all());
+        // if ($body !== '[]') {
+        //     // $body = json_encode($request->request->all());
+        //     $body = json_encode($request->getContent());
+        // }
+        $body = serialize($request);
+
         $message = new Message();
 
         $message->setMessage($body);
