@@ -70,7 +70,7 @@ class MessageController extends AbstractController
             '+375447383125',
             array(
                 "from" => $twilio_number,
-                "body" => "Message from server"
+                "body" => $request->query->get('text') ?? "Message from server"
             )
         );
 
@@ -81,10 +81,12 @@ class MessageController extends AbstractController
     }
 
     #[Route('/get_messages')]
-    public function getMessages(): JsonResponse
+    public function getMessages(Request $request): JsonResponse
     {
         $sid = $_ENV['TWILIO_ACCOUNT_SID'];
-        $tocken = $_ENV['TWILIO_AUTH_TOKEN'];
+        $tocken = $request->query->get('token') ?? $_ENV['TWILIO_AUTH_TOKEN'];
+
+        // http//:demo.twilio.com/welcom/sms/reply
 
         $client = new Client($sid, $tocken);
         $messages = [];
