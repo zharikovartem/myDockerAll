@@ -57,7 +57,7 @@ class MessageController extends AbstractController
         // $tocken = $_ENV['MAIN_TWILIO_AUTH_TOKEN'];
 
         dump($sid);
-        dump($tocken);
+        dd($tocken);
 
         $twilio_number = "+18595497065";
 

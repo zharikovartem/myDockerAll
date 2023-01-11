@@ -1261,3 +1261,4 @@
 10.104.0.1 - - [11/Jan/2023:11:11:51 +0000] "GET /_profiler/e5ec2d?panel=logger HTTP/1.1" 200 75011 "http://localhost:8081/_profiler/e5ec2d?panel=logger" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" "-"
 10.104.0.1 - - [11/Jan/2023:11:12:03 +0000] "GET /_profiler/e5ec2d?panel=exception HTTP/1.1" 200 49727 "http://localhost:8081/_profiler/e5ec2d?panel=exception" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" "-"
 10.104.0.1 - - [11/Jan/2023:11:21:34 +0000] "GET /api/send HTTP/1.1" 200 62 "http://localhost:8081/api/send" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" "-"
+10.104.0.1 - - [11/Jan/2023:11:33:05 +0000] "GET /api/send HTTP/1.1" 500 17658 "http://localhost:8081/api/send" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" "-"
