@@ -49,15 +49,18 @@ class MessageController extends AbstractController
     }
 
     #[Route('/send')]
-    public function send(): JsonResponse
+    public function send(Request $request): JsonResponse
     {
         $sid = $_ENV['TWILIO_ACCOUNT_SID'];
-        $tocken = $_ENV['TWILIO_AUTH_TOKEN'];
+        $tocken = $request->query->get('token') ?? $_ENV['TWILIO_AUTH_TOKEN'];
         // $sid = $_ENV['MAIN_TWILIO_ACCOUNT_SID'];
         // $tocken = $_ENV['MAIN_TWILIO_AUTH_TOKEN'];
 
-        dump($sid);
-        dd($tocken);
+        if ($request->query->get('dd')){
+            dump($sid);
+            dump($request->query->get('token'));
+            dd($tocken);
+        }
 
         $twilio_number = "+18595497065";
 

@@ -3,5 +3,5 @@
 node_modules
 .env
 .docker-compose.yml
-docker/log/nginx/access.log
-docker/log/nginx/error.log 
+.docker/log/nginx/access.log
+.docker/log/nginx/error.log 
