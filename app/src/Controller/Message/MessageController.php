@@ -49,6 +49,8 @@ class MessageController extends AbstractController
         $em->persist($message);
         $em->flush();
 
+        $test = $this->getMessages($request);
+
         $response = new Response('<Response><Message>'.$body.'</Message></Response>');
         $response->headers->set('content-type', 'text/xml');
 
