@@ -34,7 +34,7 @@ class MessageController extends AbstractController
             // $body = json_encode($request->request->all());
             $body = '2)'.json_encode($request->attributes);
         }
-        $body = '2)'.json_encode($request->attributes);
+        $body = '3)'.json_encode($request->request->all());
 
         $message = new Message();
 
