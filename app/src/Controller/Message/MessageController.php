@@ -31,7 +31,8 @@ class MessageController extends AbstractController
     {
         $body = json_encode($request->query->all());
         if ($body !== '[]') {
-            $body = json_encode($request->request->all());
+            // $body = json_encode($request->request->all());
+            $body = json_encode($request->getContent());
         }
         $message = new Message();
 
