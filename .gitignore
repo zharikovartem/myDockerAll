@@ -1,5 +1,4 @@
 *.bash_history
 .idea
 node_modules
-.env
 .docker-compose.yml
