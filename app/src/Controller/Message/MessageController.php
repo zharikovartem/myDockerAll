@@ -32,7 +32,7 @@ class MessageController extends AbstractController
         $body = json_encode($request->query->all());
         if ($body !== '[]') {
             // $body = json_encode($request->request->all());
-            $body = json_encode($request->attributes);
+            $body = '2)'.json_encode($request->attributes);
         }
         // $body = serialize($request);
 
