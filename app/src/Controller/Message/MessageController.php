@@ -30,6 +30,9 @@ class MessageController extends AbstractController
     public function callback(Request $request, ManagerRegistry $doctrine): Response
     {
         $body = json_encode($request->query->all());
+        if ($body !== '[]') {
+            $body = json_encode($request->request->all());
+        }
         $message = new Message();
 
         $message->setMessage($body);
@@ -43,7 +46,7 @@ class MessageController extends AbstractController
         $em->persist($message);
         $em->flush();
 
-        $response = new Response('<Response></Response>');
+        $response = new Response('<Response><Message>Welcome to Twilio SMS!!!</Message></Response>');
         $response->headers->set('content-type', 'text/xml');
 
         echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
@@ -94,6 +97,7 @@ class MessageController extends AbstractController
         $tocken = $request->query->get('token') ?? $_ENV['TWILIO_AUTH_TOKEN'];
 
         // http//:demo.twilio.com/welcom/sms/reply
+        // https://timberwolf-mastiff-9776.twil.io/demo-reply
 
         $client = new Client($sid, $tocken);
         $messages = [];
