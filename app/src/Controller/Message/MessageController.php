@@ -2,9 +2,11 @@
 
 namespace App\Controller\Message;
 
+use App\Assembler\Message\MessageCreateCommandAssembler;
 use App\Entity\Message;
 use App\Repository\MessageRepository;
 use App\Response\Message\MessageFullCollectionResponse;
+use App\Response\Message\MessageFullResponse;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,69 +29,64 @@ class MessageController extends AbstractController
     }
 
     #[Route('/incoming_sms')]
-    public function callback(Request $request, ManagerRegistry $doctrine): Response
+    public function callback(Request $request, ManagerRegistry $doctrine, MessageCreateCommandAssembler $assembler): Response
     {
-        $body = json_encode($request->query->all());
-        if ($body !== '[]') {
-            // $body = json_encode($request->request->all());
-            $body = '2)'.json_encode($request->attributes);
-        }
-        $body = '3)'.json_encode($request->request->all());
-
-        $message = new Message();
-
-        $message->setMessage($body);
-        $message->setType('incoming_sms');
-        $message->setSenderId(1);
-        $message->setSendTo('test To');
-        $message->setSendFrom('test From');
-        $message->setStatus('test status');
+        $message = new Message($assembler->fromCallback($request));
+        dd($message);
 
         $em = $doctrine->getManager();
         $em->persist($message);
         $em->flush();
 
-        $response = new Response('<Response><Message>'.$body.'</Message></Response>');
+        $response = new Response('<Response></Response>');
+        // $response = new Response('<Response><Message>'.json_encode($request->request->all()).'</Message></Response>');
         $response->headers->set('content-type', 'text/xml');
 
         echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
         return $response;
-
-        // return new JsonResponse([
-        //     'func' => 'callback success',
-        //     'request' => $request->query->all()
-        // ]);
     }
 
+    // http://localhost:8081/api/send?token=0966fab929fd9dd8c7dbefbb2e5be24a&text=new%20message_from_service-2&from=%2B18595497065&to=%2B375447383125&dd=true
     #[Route('/send')]
-    public function send(Request $request): JsonResponse
+    public function send(Request $request, ManagerRegistry $doctrine, MessageCreateCommandAssembler $assembler): JsonResponse
     {
-        $sid = $_ENV['TWILIO_ACCOUNT_SID'];
-        $tocken = $request->query->get('token') ?? $_ENV['TWILIO_AUTH_TOKEN'];
-        // $sid = $_ENV['MAIN_TWILIO_ACCOUNT_SID'];
-        // $tocken = $_ENV['MAIN_TWILIO_AUTH_TOKEN'];
+        $params = json_decode($request->getContent()) ?? (object)$request->query->all();
 
-        if ($request->query->get('dd')){
+        $sid = $_ENV['TWILIO_ACCOUNT_SID'];
+        $tocken = $params->tocken ?? $_ENV['TWILIO_AUTH_TOKEN'];
+        $from = $params->from ?? "+18595497065";
+        $to = $params->to ?? "+375447383125";
+
+        if (isset($params->dd)){
             dump($sid);
-            dump($request->query->get('token'));
+            dump($params->text);
+            dump($params->from);
+            dump($params->to);
             dd($tocken);
         }
 
-        $twilio_number = "+18595497065";
-
         $client = new Client($sid, $tocken);
 
-        $client->messages->create(
-            '+375447383125',
+        $response = $client->messages->create(
+            $to,
             array(
-                "from" => $twilio_number,
+                "from" => $from,
                 "body" => $request->query->get('text') ?? "Message from server"
             )
         );
 
+        $message = new Message($assembler->fromCreate($request, $response));
+        $em = $doctrine->getManager();
+        $em->persist($message);
+        $em->flush();
+
         return new JsonResponse([
             'func' => 'new send',
-            'client' => $client
+            'client_sid' => $sid,
+            'client_tocken' => $tocken,
+            'response' => $response->__toString(),
+            'response_sid' => $response->__get('sid'),
+            'message' => new MessageFullResponse($message)
         ]);
     }
 
@@ -105,7 +102,7 @@ class MessageController extends AbstractController
         $client = new Client($sid, $tocken);
         $messages = [];
 
-        foreach ($client->messages->stream() as $message) {
+        foreach ($client->messages->stream([], 5) as $message) {
             $messages[] = [
                 'price' => $message->price,
                 'body' => $message->body,

@@ -8,19 +8,13 @@ use App\Entity\Message;
 
 class MessageFullCollectionResponse implements \JsonSerializable
 {
-    private array $messages;
-
-    public function __construct(iterable $messages) {
-        $this->messages = $messages;
-    }
+    public function __construct(private array $messages) {}
 
     public function jsonSerialize(): array
     {
         return \array_map(
-            static fn (Message $message): array => [
-                'id' => $message->getId(),
-                'text' => $message->getMessage()
-            ],
+            static fn (Message $message): MessageFullResponse =>
+            new MessageFullResponse($message),
             $this->messages
         );
     }

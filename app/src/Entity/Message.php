@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use App\DTO\Message\MessageDTO;
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -39,8 +40,22 @@ class Message
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    public function __construct() {
+    #[ORM\Column(length: 255)]
+    private ?string $direction = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $messageSid = null;
+
+    public function __construct(MessageDTO $dto) {
         $this->createAt = new \DateTimeImmutable();
+        $this->type = 'sms';
+        $this->senderId = 0;
+        $this->message = $dto->message;
+        $this->messageSid = $dto->messageSid;
+        $this->status = $dto->status;
+        $this->direction = $dto->direction;
+        $this->sendTo = $dto->sendTo;
+        $this->sendFrom = $dto->sendFrom;
     }
 
     public function getId(): ?int
@@ -140,6 +155,46 @@ class Message
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of messageSid
+     */ 
+    public function getMessageSid()
+    {
+        return $this->messageSid;
+    }
+
+    /**
+     * Set the value of messageSid
+     *
+     * @return  self
+     */ 
+    public function setMessageSid($messageSid)
+    {
+        $this->messageSid = $messageSid;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of direction
+     */ 
+    public function getDirection()
+    {
+        return $this->direction;
+    }
+
+    /**
+     * Set the value of direction
+     *
+     * @return  self
+     */ 
+    public function setDirection($direction)
+    {
+        $this->direction = $direction;
 
         return $this;
     }
